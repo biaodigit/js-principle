@@ -5,12 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<script src="promise-principle.js"></script>
+<script src="(ES6)promise-principle.js"></script>
 <script>
     let a = 1;
-    new DPromise((resolve, reject) => {
+    new myPromise((resolve, reject) => {
         if (a) {
-            resolve('success')
+            resolve('success!')
         } else {
             reject('error')
         }
