@@ -17,9 +17,9 @@ class myPromise {
         let resolve = handle.bind(this, 'resolved');
         let reject = handle.bind(this, 'rejected');
 
-        setTimeout(fn, null, resolve, reject);
-    }
 
+        fn(resolve, reject);
+    }
 
     then(resFn, rejFn) {
         if (!isFunction(resFn)) resFn = (val) => val;
@@ -27,25 +27,29 @@ class myPromise {
 
         return new myPromise((resolve, reject) => {
             let onResolveFn = (val) => {
-                try {
-                    let v = resFn(val);
-                    if (isThenable(v)) {
-                        v.then(resolve, reject)
-                    } else {
-                        resolve(v)
+                setTimeout(() => {
+                    try {
+                        let v = resFn(val);
+                        if (isThenable(v)) {
+                            v.then(resolve, reject)
+                        } else {
+                            resolve(v)
+                        }
+                    } catch (e) {
+                        reject(e)
                     }
-                } catch (e) {
-                    reject(e)
-                }
+                })
             };
 
             let onRejectFn = (err) => {
-                try {
-                    let e = rejFn(err);
-                    if (isThenable(e)) e.then(resolve, reject)
-                } catch (e) {
-                    reject(e)
-                }
+                setTimeout(() => {
+                    try {
+                        let e = rejFn(err);
+                        if (isThenable(e)) e.then(resolve, reject)
+                    } catch (e) {
+                        reject(e)
+                    }
+                })
             };
 
             switch (this.status) {

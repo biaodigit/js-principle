@@ -1,4 +1,4 @@
-function DPromise(fn) {
+function myPromise(fn) {
     let self = this;
     this.status = 'pending';
     this.data = undefined;
@@ -36,7 +36,7 @@ function DPromise(fn) {
     }
 }
 
-DPromise.prototype.then = function (onResolved, onRejected) {
+myPromise.prototype.then = function (onResolved, onRejected) {
     let self = this,
         promise2;
 
@@ -48,11 +48,11 @@ DPromise.prototype.then = function (onResolved, onRejected) {
     }
 
     if (self.status === 'resolved') {
-        return promise2 = new DPromise(function (resolve, reject) {
+        return promise2 = new myPromise(function (resolve, reject) {
             setTimeout(function () {
                 try {
                     let x = onResolved(self.data);
-                    if (x instanceof DPromise) {
+                    if (x instanceof myPromise) {
                         x.then(resolve, reject)
                     }else{
                         resolve(x)
@@ -65,11 +65,11 @@ DPromise.prototype.then = function (onResolved, onRejected) {
     }
 
     if (self.status === 'rejected') {
-        return promise2 = new DPromise(function (resolve, reject) {
+        return promise2 = new myPromise(function (resolve, reject) {
             setTimeout(function () {
                 try {
                     let x = onRejected(self.data)
-                    if (x instanceof DPromise) {
+                    if (x instanceof myPromise) {
                         x.then(resolve, reject)
                     }
                 } catch (e) {
@@ -80,11 +80,11 @@ DPromise.prototype.then = function (onResolved, onRejected) {
     }
 
     if (self.status === 'pending') {
-        return promise2 = new DPromise(function (resolve, reject) {
+        return promise2 = new myPromise(function (resolve, reject) {
             self.onResolvedCallback.push(function (value) {
                 try {
                     let x = onResolved(self.data)
-                    if (x instanceof DPromise) {
+                    if (x instanceof myPromise) {
                         x.then(resolve, reject)
                     }
                 } catch (e) {
@@ -95,7 +95,7 @@ DPromise.prototype.then = function (onResolved, onRejected) {
             self.onRejectedCallback.push(function (reason) {
                 try {
                     var x = onRejected(self.data)
-                    if (x instanceof DPromise) {
+                    if (x instanceof myPromise) {
                         x.then(resolve, reject)
                     }
                 } catch (e) {
@@ -106,6 +106,6 @@ DPromise.prototype.then = function (onResolved, onRejected) {
     }
 };
 
-DPromise.prototype.catch = function (onRejected) {
+myPromise.prototype.catch = function (onRejected) {
     return this.then(null, onRejected)
 }

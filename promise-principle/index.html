@@ -8,8 +8,10 @@
 <script src="(ES6)promise-principle.js"></script>
 <script>
     let a = 1;
+
     new myPromise((resolve, reject) => {
         if (a) {
+            console.log(3)
             resolve('success!')
         } else {
             reject('error')
@@ -17,6 +19,7 @@
     }).then((res) => {
         console.log(res)        // success
     })
+    console.log(2)
 </script>
 </body>
 </html>

@@ -7,15 +7,35 @@
 <body>
 <script src="call-apply-bind.js"></script>
 <script>
-    var obj = {
+    var obj1 = {
         'name': 'haha'
     };
 
-    var log = function (age,sex) {
-        console.log(this.name,age,sex)
+    var log = function (age, sex) {
+        console.log(this.name, age, sex)
     }
 
-    log.myCall(obj,20,'man')
+    //test call
+    log.myCall(obj1, 20, 'man')
+
+    //test apply
+    log.myApply(obj1, [20, 'man'])
+
+    //text bind
+    var test = function (a, b, c) {
+        console.log('作用域绑定 ' + this.value)
+        console.log(b)
+        console.log('testBind参数传递 ' + a.value2)
+        console.log('调用参数传递 ' + b.value3)
+        console.log(c)
+    }
+
+    var obj2 = {
+        value: 'ok'
+    }
+
+    var newFn = test.myBind(obj2, {value2: 'ok'}, {value3: 'vue'})
+    newFn('hello bind')
 </script>
 </body>
 </html>
