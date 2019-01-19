@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="regexp.js"></script>
+<script>
+    let reg = new MyRegExp('ab*cc*');
+
+    console.log(reg.test('abc'))
+    console.log(reg.test('abb'))
+    console.log(reg.test('ac'))
+    console.log(reg.test('bc'))
+    console.log(reg.test('abbcccc'))
+</script>
+</body>
+</html>
