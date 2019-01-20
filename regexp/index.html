@@ -7,13 +7,13 @@
 <body>
 <script src="regexp.js"></script>
 <script>
-    let reg = new MyRegExp('ab*cc*');
+    let reg = new MyRegExp('ab*cc*.');
 
-    console.log(reg.test('abc'))
-    console.log(reg.test('abb'))
-    console.log(reg.test('ac'))
-    console.log(reg.test('bc'))
-    console.log(reg.test('abbcccc'))
+    console.log(reg.test('abcd'))   // true
+    console.log(reg.test('abb'))    // false
+    console.log(reg.test('ac'))     // false
+    console.log(reg.test('bc'))     // false
+    console.log(reg.test('abbccccd'))  // true
 </script>
 </body>
 </html>
