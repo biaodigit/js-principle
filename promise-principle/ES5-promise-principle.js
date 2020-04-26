@@ -109,3 +109,7 @@ myPromise.prototype.then = function (onResolved, onRejected) {
 myPromise.prototype.catch = function (onRejected) {
     return this.then(null, onRejected)
 }
+
+myPromuse.prototype.all = function() {
+    
+}
